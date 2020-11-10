@@ -14,8 +14,9 @@ class Book
     @title = title
     @publication_date = publication_date
     @author = @author_first_name + " " + @author_last_name
-    @publication_year = @publication_date.split[-1]
+    @publication_year = @publication_date.split[-1] #the step of creating an array becuase of split is an additional data estructer that I dont want to create. Better use [-4..-1] to access the last 4 letters of the string.
     @books = []
+    #should have created a method for name and year so it is more dynamic. Also avoid putting too much in initialize
   end
 
   def write(book_name, publication_date)

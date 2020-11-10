@@ -2,6 +2,7 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/library'
 require './lib/author'
+require './lib/book'
 
 class LibraryTest < Minitest::Test
 
@@ -15,18 +16,21 @@ class LibraryTest < Minitest::Test
   end
 
   def test_it_exists_and_has_attributes
+    #always assert instance of it first
+    #add assert_instance_of Library, dpl
     assert_equal "Denver Public Library", @dpl.name
-    assert_equal [], @dpl.books
-    assert_equal [], @dpl.authors
   end
 
-  def test_it_can_add_authors
+  def test_it_can_add_authors_and_books #each test should test only one thing, split this
     @jane_eyre = @charlotte_bronte.write("Jane Eyre", "October 16, 1847")
     @professor = @charlotte_bronte.write("The Professor", "1857")
     @villette =  @charlotte_bronte.write("Villette", "1853")
     @mockingbird = @harper_lee.write("To Kill a Mockingbird", "July 11, 1960")
+    assert_equal [], @dpl.books
+    assert_equal [], @dpl.authors
     @dpl.add_author(@charlotte_bronte)
     @dpl.add_author(@harper_lee)
+    #use expected variable for arrays and hashes
     assert_equal [@charlotte_bronte, @harper_lee], @dpl.authors
     assert_equal [@jane_eyre, @professor, @villette, @mockingbird], @dpl.books
   end
@@ -56,4 +60,7 @@ class LibraryTest < Minitest::Test
     expected = {:start=>"1960", :end=>"1960"}
     assert_equal expected, @dpl.publication_time_frame_for(@harper_lee)
   end
+
+  #iteration 4 #check for initial values even if IP doesnt ask for it
+
 end
